@@ -391,6 +391,18 @@
       box-shadow: var(--shadow);
     }
 
+    .image-card img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover;
+    }
+
+    .portrait-stack .image-card:first-child img {
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+    }
+
     .image-card figcaption {
       padding: 14px 16px 16px;
       color: var(--text-light);
