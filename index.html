@@ -160,6 +160,36 @@
       font-size: 0.92rem;
     }
 
+    .menu-toggle {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      background: transparent;
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      cursor: pointer;
+      color: var(--text);
+      flex-shrink: 0;
+    }
+    .toggle-bar,
+    .toggle-bar::before,
+    .toggle-bar::after {
+      display: block;
+      width: 18px;
+      height: 1.5px;
+      background: currentColor;
+      position: absolute;
+      transition: transform 0.25s ease, opacity 0.25s ease;
+      left: 0;
+    }
+    .toggle-bar::before { content: ''; top: -6px; }
+    .toggle-bar::after  { content: ''; top: 6px; }
+    .menu-open .toggle-bar { background: transparent; }
+    .menu-open .toggle-bar::before { transform: rotate(45deg) translate(4px, 4px); }
+    .menu-open .toggle-bar::after  { transform: rotate(-45deg) translate(4px, -4px); }
+
     .hero {
       position: relative;
       color: #fff;
@@ -218,9 +248,9 @@
     }
 
     h1 {
-      max-width: 11em;
       font-size: clamp(2.8rem, 6vw, 5.4rem);
       letter-spacing: 0.03em;
+      word-break: keep-all;
     }
 
     .hero-copy p {
@@ -803,21 +833,60 @@
     @media (max-width: 760px) {
       .header-inner {
         padding: 14px 0;
-        align-items: flex-start;
-        flex-direction: column;
+        align-items: center;
       }
 
-      .nav-list,
+      .menu-toggle {
+        display: inline-flex;
+        position: relative;
+      }
+
+      nav[aria-label="主要メニュー"] {
+        position: fixed;
+        inset: 60px 0 auto 0;
+        background: var(--bg);
+        border-bottom: 1px solid var(--line);
+        padding: 16px 20px 24px;
+        z-index: 999;
+        transform: translateY(-120%);
+        opacity: 0;
+        pointer-events: none;
+        transition: transform 0.3s ease, opacity 0.3s ease;
+      }
+
+      .menu-open nav[aria-label="主要メニュー"] {
+        transform: translateY(0);
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .nav-list {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+
+      .nav-list a {
+        display: flex;
+        align-items: center;
+        min-height: 44px;
+        border-bottom: 1px solid var(--line);
+        width: 100%;
+        font-size: 0.95rem;
+      }
+
+      .nav-list li:last-child a {
+        border-bottom: none;
+      }
+
       .service-grid,
       .strength-grid,
       .stats,
       .form-grid {
         grid-template-columns: 1fr;
-      }
-
-      .nav-list {
-        display: grid;
-        gap: 10px;
       }
 
       .hero-inner {
@@ -908,7 +977,8 @@
         <strong>SateOn / Seion Ledger</strong>
         <span>セイオン税理士事務所</span>
       </a>
-      <nav aria-label="主要メニュー">
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav-list-menu" aria-label="メニューを開く"><span class="toggle-bar" aria-hidden="true"></span></button>
+      <nav aria-label="主要メニュー" id="nav-list-menu">
         <ul class="nav-list">
           <li><a href="#about">事務所案内</a></li>
           <li><a href="#service">サービス</a></li>
@@ -1318,5 +1388,33 @@
     </div>
     <p style="text-align:center;font-size:0.75rem;color:rgba(255,255,255,0.85);padding:8px 0;">※ SateOnの制作イメージです。実在する店舗・企業ではありません。</p>
 </footer>
+<script>
+// ハンバーガーメニュー
+(function() {
+  var toggle = document.querySelector('.menu-toggle');
+  var body = document.body;
+  if (!toggle) return;
+  toggle.addEventListener('click', function() {
+    var open = body.classList.toggle('menu-open');
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.setAttribute('aria-label', open ? 'メニューを閉じる' : 'メニューを開く');
+  });
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && body.classList.contains('menu-open')) {
+      body.classList.remove('menu-open');
+      toggle.setAttribute('aria-expanded', 'false');
+      toggle.setAttribute('aria-label', 'メニューを開く');
+      toggle.focus();
+    }
+  });
+  document.querySelectorAll('.nav-list a').forEach(function(a) {
+    a.addEventListener('click', function() {
+      body.classList.remove('menu-open');
+      toggle.setAttribute('aria-expanded', 'false');
+      toggle.setAttribute('aria-label', 'メニューを開く');
+    });
+  });
+})();
+</script>
 </body>
 </html>
