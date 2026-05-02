@@ -1,4 +1,4 @@
-<!-- v1.6 -->
+<!-- v1.7 -->
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -383,7 +383,7 @@
     .contact-grid,
     .footer-grid {
       display: grid;
-      gap: 28px;
+      gap: 40px;
     }
 
     .about-grid {
@@ -454,25 +454,27 @@
     .stats {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 16px;
+      gap: 24px;
     }
 
     .stat-card,
-    .service-card,
-    .strength-card,
-    .profile-card,
     .faq-item,
     .company-card,
     .contact-card,
     .cta-card {
-      border: 1px solid var(--line);
+      background: #fff;
+    }
+
+    /* 画像あり: border-radius維持・border/shadow削除 */
+    .service-card,
+    .strength-card,
+    .profile-card {
       border-radius: var(--r);
       background: #fff;
-      box-shadow: var(--shadow);
     }
 
     .stat-card {
-      padding: 22px;
+      padding: 30px;
     }
 
     .stat-card strong {
@@ -488,7 +490,7 @@
     .service-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 22px;
+      gap: 32px;
     }
 
     .service-card {
@@ -501,7 +503,7 @@
     .company-card,
     .contact-card,
     .cta-card {
-      padding: 22px;
+      padding: 30px;
     }
 
     .service-card h3,
@@ -521,6 +523,7 @@
 
     .strength-grid {
       grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 32px;
     }
 
     .strength-card {
@@ -603,11 +606,18 @@
 
     .faq-list {
       display: grid;
-      gap: 16px;
+      gap: 0;
     }
 
     .faq-item {
-      padding: 24px;
+      padding: 28px 0;
+      border-bottom: 1px solid var(--line);
+      border-radius: 0;
+      background: transparent;
+    }
+
+    .faq-item:first-child {
+      border-top: 1px solid var(--line);
     }
 
     .faq-item p {
@@ -1002,7 +1012,7 @@
           <h1>中小企業の意思決定に、明かりを灯す。</h1>
           <p>東京・丸の内の税理士事務所。記帳代行から節税提案まで、経営を数字で支えます。</p>
           <div class="hero-actions">
-            <a class="button primary" href="#contact">ご相談を予約する</a>
+            <a class="button primary" href="#contact">初回無料相談はこちら</a>
             <a class="button secondary" href="#service">支援内容を見る</a>
           </div>
         </div>
@@ -1367,7 +1377,7 @@
           </div>
           <div class="cta-actions">
             <a class="button primary" href="#contact">無料相談を申し込む</a>
-            <a class="button secondary" href="tel:03-0000-9999">03-0000-9999 に電話する</a>
+            <a class="button secondary" href="tel:03-0000-0000">03-0000-0000 に電話する</a>
           </div>
         </div>
       </div>
