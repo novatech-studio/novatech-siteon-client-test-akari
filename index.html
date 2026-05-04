@@ -14,7 +14,7 @@
   <meta property="og:image" content="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1920&q=80">
   <meta property="og:url" content="https://seionledger.example.jp/">
   <meta name="twitter:card" content="summary_large_image">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%2314182A'/><text x='16' y='22' font-family='serif' font-size='16' font-weight='bold' fill='%23B8962A' text-anchor='middle'>S</text></svg>">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%2314182A'/><text x='16' y='22' font-family='serif' font-size='16' font-weight='bold' fill='%232D3748' text-anchor='middle'>S</text></svg>">
   <link rel="preload" as="image" href="images/hero.webp" fetchpriority="high">
   <style>
     :root {
@@ -25,7 +25,8 @@
       --text: #14182A;
       --text-mid: #3A4060;
       --text-light: #6A7090;
-      --accent: #B8962A;
+      --accent: #2D3748;
+      --accent-rgb: 45, 55, 72;
       --line: #D0D4DC;
       --r: 4px;
       --max: 1180px;
@@ -306,19 +307,40 @@
       min-height: 48px;
       padding: 0 18px;
       border: 1px solid transparent;
-      border-radius: var(--r);
+      border-radius: 8px !important;
+      letter-spacing: 0.1em;
       transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
     }
 
     .button.primary {
-      color: var(--bg-dark);
+      color: #fff;
       background: var(--accent);
+      border: none;
     }
 
     .button.secondary {
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      background: transparent;
+    }
+
+    .button.secondary:hover,
+    .button.secondary:focus-visible {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    /* ヒーロー内のセカンダリボタンは白枠白字を維持 */
+    .hero .button.secondary {
       border-color: rgba(255, 255, 255, 0.34);
       color: #fff;
       background: transparent;
+    }
+
+    .hero .button.secondary:hover,
+    .hero .button.secondary:focus-visible {
+      background: rgba(255, 255, 255, 0.12);
+      color: #fff;
     }
 
     .button:hover,
@@ -425,10 +447,11 @@
 
     .image-card {
       overflow: hidden;
-      border: 1px solid var(--line);
-      border-radius: var(--r);
-      background: #fff;
+      border: none;
+      border-radius: 8px;
+      background: rgba(var(--accent-rgb), 0.04);
       box-shadow: var(--shadow);
+      padding: 0;
     }
 
     .image-card img {
@@ -482,19 +505,30 @@
       line-height: 1.8;
     }
 
-    .faq-item,
-    .company-card,
-    .contact-card,
-    .cta-card {
-      background: #fff;
+    .faq-item {
+      background: transparent;
+    }
+
+    .company-card {
+      background: rgba(var(--accent-rgb), 0.04);
+      border: none;
+      border-radius: 8px;
+      padding: 24px;
+    }
+
+    .contact-card {
+      background: var(--bg-dark);
+      border: none;
+      border-radius: 8px;
     }
 
     /* 画像あり: border-radius維持・border/shadow削除 */
     .service-card,
     .strength-card,
     .profile-card {
-      border-radius: var(--r);
-      background: #fff;
+      border: none;
+      border-radius: 8px;
+      background: rgba(var(--accent-rgb), 0.04);
     }
 
     .service-grid {
@@ -510,8 +544,6 @@
     .service-body,
     .strength-body,
     .profile-body,
-    .company-card,
-    .contact-card,
     .cta-card {
       padding: 30px;
     }
@@ -538,7 +570,7 @@
 
     .strength-card {
       overflow: hidden;
-      background: linear-gradient(180deg, #fff 0%, rgba(245, 246, 248, 0.92) 100%);
+      background: rgba(var(--accent-rgb), 0.04);
     }
 
     .strength-card ul,
@@ -649,7 +681,7 @@
     }
 
     .company-card {
-      background: linear-gradient(180deg, #fff 0%, rgba(232, 234, 240, 0.8) 100%);
+      background: rgba(var(--accent-rgb), 0.04);
     }
 
     .company-list li,
@@ -696,9 +728,9 @@
 
     .contact-form {
       padding: 28px;
-      border: 1px solid var(--line);
-      border-radius: var(--r);
-      background: #fff;
+      border: none;
+      border-radius: 8px;
+      background: rgba(var(--accent-rgb), 0.04);
       box-shadow: var(--shadow);
     }
 
@@ -752,6 +784,8 @@
       grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
       gap: 28px;
       color: #fff;
+      border: none;
+      border-radius: 8px;
       background:
         linear-gradient(135deg, rgba(20, 24, 42, 0.96), rgba(20, 24, 42, 0.82)),
         url("https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?w=800&h=520&fit=crop&fm=webp&q=80") center/cover;
