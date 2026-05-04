@@ -451,13 +451,37 @@
       font-size: 0.88rem;
     }
 
-    .stats {
+    .strengths-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 24px;
+      gap: 0;
     }
 
-    .stat-card,
+    .strength-item {
+      padding: 28px 32px;
+      background: rgba(0, 0, 0, 0.02);
+    }
+
+    .strength-item:nth-child(even) {
+      background: transparent;
+    }
+
+    .strength-item h3 {
+      margin: 0 0 10px;
+      font-family: var(--font-heading);
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--text);
+      letter-spacing: 0.04em;
+    }
+
+    .strength-item p {
+      margin: 0;
+      font-size: 0.88rem;
+      color: var(--text-mid);
+      line-height: 1.8;
+    }
+
     .faq-item,
     .company-card,
     .contact-card,
@@ -471,20 +495,6 @@
     .profile-card {
       border-radius: var(--r);
       background: #fff;
-    }
-
-    .stat-card {
-      padding: 30px;
-    }
-
-    .stat-card strong {
-      display: block;
-      margin-bottom: 8px;
-      color: var(--bg-dark);
-      font-family: var(--font-display);
-      font-size: 2rem;
-      font-weight: 400;
-      line-height: 1;
     }
 
     .service-grid {
@@ -896,9 +906,13 @@
 
       .service-grid,
       .strength-grid,
-      .stats,
+      .strengths-grid,
       .form-grid {
         grid-template-columns: minmax(0, 1fr);
+      }
+
+      .strength-item:nth-child(even) {
+        background: rgba(0, 0, 0, 0.02);
       }
 
       .hero-inner {
@@ -1070,18 +1084,18 @@
             <div class="statement">
               <p>税務は、経営における守りであると同時に、次の一手を照らすための基盤でもあります。記帳の精度を整え、会計の見え方を揃え、経営者が安心して判断できる状態をつくる。その積み重ねを、私たちは一件ずつ丁寧に担います。</p>
             </div>
-            <div class="stats">
-              <div class="stat-card">
-                <strong>20,000+</strong>
-                <span>月額顧問の目安は 2万円から。規模に応じて無理のない設計を行います。</span>
+            <div class="strengths-grid">
+              <div class="strength-item">
+                <h3>丁寧な記帳</h3>
+                <p>月次の数字を正確に整え、経営判断の土台をつくります。</p>
               </div>
-              <div class="stat-card">
-                <strong>09:00</strong>
-                <span>平日の日中は担当者が常時対応。必要時はオンライン面談にも対応します。</span>
+              <div class="strength-item">
+                <h3>いつでも相談</h3>
+                <p>日常の疑問から経営判断まで、担当者が直接お応えします。</p>
               </div>
-              <div class="stat-card">
-                <strong>Tokyo</strong>
-                <span>東京都内を中心に、創業期から成長局面まで継続的に支援します。</span>
+              <div class="strength-item">
+                <h3>継続的な支援</h3>
+                <p>創業期から成長局面まで、事業のフェーズに合わせて伴走します。</p>
               </div>
             </div>
           </div>
