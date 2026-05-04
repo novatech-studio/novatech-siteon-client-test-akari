@@ -135,7 +135,6 @@
     .brand-mark strong,
     .section-kicker,
     .eyebrow,
-    .marquee-track span,
     .cta-note {
       letter-spacing: 0.16em;
       text-transform: uppercase;
@@ -346,35 +345,6 @@
     .button:hover,
     .button:focus-visible {
       transform: translateY(-2px);
-    }
-
-    .marquee {
-      overflow: hidden;
-      border-top: 1px solid var(--line);
-      border-bottom: 1px solid var(--line);
-      background: linear-gradient(90deg, var(--bg-alt), rgba(232, 234, 240, 0.65));
-    }
-
-    .marquee-track {
-      display: flex;
-      gap: 32px;
-      width: max-content;
-      padding: 16px 0;
-      color: var(--text-mid);
-      animation: marquee 28s linear infinite;
-    }
-
-    .marquee-track span {
-      position: relative;
-      display: inline-flex;
-      align-items: center;
-      gap: 32px;
-      font-size: 0.86rem;
-    }
-
-    .marquee-track span::after {
-      content: "•";
-      color: var(--accent);
     }
 
     section {
@@ -858,16 +828,6 @@
       font-size: 0.9rem;
     }
 
-    @keyframes marquee {
-      from {
-        transform: translateX(0);
-      }
-
-      to {
-        transform: translateX(-50%);
-      }
-    }
-
     @media (max-width: 1040px) {
       .hero-inner,
       .section-heading,
@@ -974,13 +934,6 @@
         transition-duration: 0.01ms !important;
       }
 
-      .marquee-track {
-        animation: none;
-        width: auto;
-        flex-wrap: wrap;
-        padding-left: var(--gutter);
-        padding-right: var(--gutter);
-      }
 
       .button:hover,
       .button:focus-visible {
@@ -1064,45 +1017,9 @@
             <a class="button secondary" href="#service">支援内容を見る</a>
           </div>
         </div>
-        <aside class="hero-panel" aria-label="事務所概要">
-          <dl>
-            <div>
-              <dt>Office</dt>
-              <dd>Seion Ledger税理士事務所</dd>
-            </div>
-            <div>
-              <dt>Representative</dt>
-              <dd>早瀬恒一 税理士</dd>
-            </div>
-            <div>
-              <dt>Service Hours</dt>
-              <dd>平日 9:00-18:00 / 土日祝休</dd>
-            </div>
-            <div>
-              <dt>Contact</dt>
-              <dd>03-0000-9999 / office@seionledger.example.jp</dd>
-            </div>
-          </dl>
-        </aside>
       </div>
     </section>
 
-    <div class="marquee" aria-label="Marquee">
-      <div class="marquee-track">
-        <span>記帳代行</span>
-        <span>クラウド会計</span>
-        <span>節税対策</span>
-        <span>経営アドバイザリー</span>
-        <span>創業支援</span>
-        <span>法人申告</span>
-        <span>記帳代行</span>
-        <span>クラウド会計</span>
-        <span>節税対策</span>
-        <span>経営アドバイザリー</span>
-        <span>創業支援</span>
-        <span>法人申告</span>
-      </div>
-    </div>
 
     <section id="about">
       <div class="section-inner">
