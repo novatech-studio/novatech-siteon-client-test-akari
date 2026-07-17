@@ -48,7 +48,8 @@
 
     body {
       margin: 0;
-      overflow-x: hidden;
+      /* body に overflow-x:hidden を置くと body がスクロールコンテナ化し
+         .site-header の position:sticky が効かなくなる。横スクロール抑止は html 側が担う。 */
       color: var(--text);
       background: var(--bg);
       font-family: var(--font-sans);
