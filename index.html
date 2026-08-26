@@ -943,7 +943,66 @@
         transform: none;
       }
     }
-  </style>
+  
+    /* ============================================================
+       モバイル安全ベースライン v1.0 — _common/mobile-safety.md 準拠
+       自動検査: node ../novatech-siteon-skills/tools/check-mobile.js .
+       個別に書き換えないこと。仕様変更はマスター側で行う。
+       ============================================================ */
+    :root {
+      --mb-header-h: 120px;
+      --mb-tap-min: 44px;
+    }
+
+    /* 1. 日本語の折り返し
+       word-break: keep-all 単独では CJK 連続が分割されず、コンテナ幅を超えて
+       右端が切れる（横スクロールの主因）。overflow-wrap は継承プロパティなので
+       body だけに指定すると、個別に break-word を当てた要素で溢れが残る。
+       grid / flex の min-content 幅にも効かせるため全要素に指定する。 */
+    body,
+    body * {
+      overflow-wrap: anywhere;
+    }
+
+    /* 2. アンカーの着地点を固定ヘッダーの下に出す */
+    [id] {
+      scroll-margin-top: calc(var(--mb-header-h) + 12px);
+    }
+
+    /* 4. 画像は必ず枠内に収める */
+    img, video, svg, canvas, iframe {
+      max-width: 100%;
+    }
+
+    /* 5. タップ領域 44x44 の確保
+       上下 padding で当たり判定を広げ、負マージンで見た目の位置を維持する。 */
+    @media (pointer: coarse) {
+      /* 3. iOS の入力時オートズーム防止（16px 未満だとフォーカス時に拡大される）
+         マウス環境の見た目は変えないよう、タッチ端末だけに効かせる。 */
+      input,
+      select,
+      textarea {
+        font-size: 16px;
+      }
+
+      a[href^="tel:"],
+      a[href^="mailto:"],
+      .footer-links a,
+      .footer-meta a,
+      .info-value a,
+      .topic-title {
+        display: inline-block;
+        padding: 14px 0;
+        margin: -14px 0;
+      }
+
+      .footer-links a[aria-label],
+      .footer-meta a[aria-label] {
+        min-width: var(--mb-tap-min);
+        text-align: center;
+      }
+    }
+</style>
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
