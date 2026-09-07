@@ -6,15 +6,16 @@
   <meta name="color-scheme" content="light only">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Seion Ledger税理士事務所｜新宿の税理士｜記帳代行・確定申告</title>
-  <meta name="description" content="東京・丸の内の税理士事務所。記帳代行から節税提案まで、中小企業の意思決定を数字で支える Seion Ledger税理士事務所です。">
+  <meta name="description" content="東京・新宿の税理士事務所。記帳代行から節税提案まで、中小企業の意思決定を数字で支える Seion Ledger税理士事務所です。">
   <meta name="theme-color" content="#14182A">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Seion Ledger税理士事務所｜新宿の税理士｜記帳代行・確定申告">
-  <meta property="og:description" content="東京・丸の内の税理士事務所。記帳代行から節税提案まで、経営を数字で支えます。">
-  <meta property="og:image" content="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1920&q=80">
+  <meta property="og:description" content="東京・新宿の税理士事務所。記帳代行から節税提案まで、経営を数字で支えます。">
+  <meta property="og:image" content="https://novatech-studio.github.io/novatech-siteon-client-test-akari/images/hero.webp">
   <meta property="og:url" content="https://seionledger.example.jp/">
   <meta name="twitter:card" content="summary_large_image">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%2314182A'/><text x='16' y='22' font-family='serif' font-size='16' font-weight='bold' fill='%232D3748' text-anchor='middle'>S</text></svg>">
+  <link rel="canonical" href="https://novatech-studio.github.io/novatech-siteon-client-test-akari/">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%2314182A'/><text x='16' y='22' font-family='serif' font-size='16' font-weight='bold' fill='%23F5F6F8' text-anchor='middle'>S</text></svg>">
   <link rel="preload" as="image" href="images/hero.webp" fetchpriority="high">
   <style>
     :root {
@@ -251,9 +252,12 @@
     }
 
     h1 {
-      font-size: clamp(2rem, 4.5vw, 3.8rem);
+      /* 320px でも「中小企業の意思決定に、」が1行に収まる下限にする。
+         2rem のままだと折り返して「に、」が行頭に孤立する（rules.md 52 / 45）。 */
+      font-size: clamp(1.45rem, 6.4vw, 3.8rem);
       letter-spacing: 0.03em;
       word-break: keep-all;
+      overflow-wrap: normal;
     }
 
     .hero-copy p {
@@ -691,12 +695,26 @@
       padding: 2rem;
     }
 
+    .contact-card h3 {
+      margin: 0 0 20px;
+    }
+
     .contact-card .contact-list strong {
       color: rgba(255, 255, 255, 0.72);
     }
 
     .contact-card .contact-list li {
       border-color: rgba(255, 255, 255, 0.12);
+      /* 幅 360px のカードでラベルと値を横並びにすると値の幅が足りず、
+         メールアドレスが語中で改行される（rules.md 52）。
+         ラベルを上に積んで値に全幅を渡す。 */
+      grid-template-columns: minmax(0, 1fr);
+      gap: 4px;
+    }
+
+    .contact-card .contact-list strong {
+      font-size: 0.8rem;
+      letter-spacing: 0.04em;
     }
 
     .contact-form {
@@ -850,6 +868,12 @@
     }
 
     @media (max-width: 760px) {
+      /* 会社概要リストも狭い幅ではラベル/値を縦に積む。 */
+      .company-list li {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 4px;
+      }
+
       .header-inner {
         padding: 14px 0;
         align-items: center;
@@ -1017,7 +1041,7 @@
       "telephone": "03-0000-9999",
       "email": "office@seionledger.example.jp",
       "priceRange": "月額2万円〜",
-      "description": "東京・丸の内の税理士事務所。記帳代行から節税提案まで、経営を数字で支えます。",
+      "description": "東京・新宿の税理士事務所。記帳代行から節税提案まで、経営を数字で支えます。",
       "address": {
         "@type": "PostalAddress",
         "streetAddress": "西新宿2-77-77",
@@ -1051,8 +1075,8 @@
 
   <header class="site-header">
     <div class="header-inner">
-      <a class="brand-mark" href="#top" aria-label="SateOn / Seion Ledger セイオン税理士事務所 トップへ">
-        <strong>SateOn / Seion Ledger</strong>
+      <a class="brand-mark" href="#top" aria-label="Seion Ledger セイオン税理士事務所 トップへ">
+        <strong>Seion Ledger</strong>
         <span>セイオン税理士事務所</span>
       </a>
       <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav-list-menu" aria-label="メニューを開く"><span class="toggle-bar" aria-hidden="true"></span></button>
@@ -1076,7 +1100,7 @@
         <div class="hero-copy">
           <span class="eyebrow">Trusted Tax &amp; Accounting Partner</span>
           <h1>中小企業の意思決定に、<br>明かりを灯す。</h1>
-          <p>東京・丸の内の税理士事務所。記帳代行から節税提案まで、経営を数字で支えます。</p>
+          <p>東京・新宿の税理士事務所。記帳代行から節税提案まで、経営を数字で支えます。</p>
           <div class="hero-actions">
             <a class="button primary" href="#contact">初回無料相談はこちら</a>
             <a class="button secondary" href="#service">支援内容を見る</a>
@@ -1235,7 +1259,7 @@
         <div class="section-heading">
           <div>
             <div class="section-kicker">Profile 04</div>
-            <h2>担当者の顔が見えることを、安心の前提にしています。</h2>
+            <h2>誰がどこまで担当するかを、はじめにお伝えします。</h2>
           </div>
           <p>税務判断の精度だけでなく、相談相手としての距離感も重要です。役割分担を明確にしながら、誰が見ても引き継げる実務体制を整えています。</p>
         </div>
@@ -1255,9 +1279,9 @@
                 </div>
               </div>
               <div class="member">
-                <img src="images/profile-mizumori.webp" alt="税理士 水守恒一" width="180" height="180" loading="lazy">
+                <img src="images/profile-mizumori.webp" alt="税理士 水守隆之" width="180" height="180" loading="lazy">
                 <div>
-                  <strong>水守恒一 / 税理士</strong>
+                  <strong>水守隆之 / 税理士</strong>
                   <span>法人申告、資金繰り相談、創業支援を担当。制度面の論点を丁寧に整理します。</span>
                 </div>
               </div>
@@ -1327,7 +1351,7 @@
             <ul class="company-list">
               <li><strong>事務所名</strong><span>Seion Ledger税理士事務所 / セイオン税理士事務所</span></li>
               <li><strong>代表</strong><span>早瀬恒一（税理士）</span></li>
-              <li><strong>スタッフ</strong><span>篠崎理央（税理士） / 水守恒一（税理士） / 名瀬千紘（スタッフ）</span></li>
+              <li><strong>スタッフ</strong><span>篠崎理央（税理士） / 水守隆之（税理士） / 名瀬千紘（スタッフ）</span></li>
               <li><strong>住所</strong><span>東京都新宿区西新宿2-77-77</span></li>
               <li><strong>電話</strong><span>03-0000-9999</span></li>
               <li><strong>受付時間</strong><span>9:00-18:00</span></li>
@@ -1391,7 +1415,7 @@
               </div>
             </div>
             <button class="button primary" type="submit">送信する</button>
-            <p class="form-note">フォーム送信先は仮設定です。公開前に Formspree 側の本番設定をご確認ください。</p>
+            <p class="form-note">ご入力いただいた情報は、ご相談への対応にのみ使用します。第三者への提供は行いません。</p>
           </form>
         </div>
       </div>
@@ -1407,7 +1431,7 @@
           </div>
           <div class="cta-actions">
             <a class="button primary" href="#contact">無料相談を申し込む</a>
-            <a class="button secondary" href="tel:03-0000-0000">03-0000-0000 に電話する</a>
+            <a class="button secondary" href="tel:03-0000-9999">03-0000-9999 に電話する</a>
           </div>
         </div>
       </div>
@@ -1418,7 +1442,7 @@
     <div class="footer-inner">
       <div class="footer-grid">
         <div class="footer-brand">
-          <strong>SateOn / Seion Ledger Tax Office</strong>
+          <strong>Seion Ledger Tax Office</strong>
           <div class="demo-notice">このページは SateOn 向けデモとして構成した架空サイトです。写真はイメージです。</div>
         </div>
         <ul class="footer-list">
