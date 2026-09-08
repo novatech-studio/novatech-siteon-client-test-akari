@@ -317,36 +317,6 @@
       font-size: 1.06rem;
     }
 
-    .hero-panel {
-      position: relative;
-      z-index: 1;
-      padding: 28px;
-      border: 1px solid rgba(255, 255, 255, 0.18);
-      border-radius: var(--r);
-      background: rgba(10, 13, 23, 0.35);
-      box-shadow: var(--shadow);
-    }
-
-    .hero-panel dl {
-      margin: 0;
-      display: grid;
-      grid-template-columns: minmax(0, 1fr);
-      gap: 16px;
-    }
-
-    .hero-panel dt {
-      margin-bottom: 4px;
-      color: rgba(255, 255, 255, 0.62);
-      font-size: 0.8rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-    }
-
-    .hero-panel dd {
-      margin: 0;
-      font-size: 1rem;
-    }
-
     .hero-actions {
       display: flex;
       flex-wrap: wrap;
@@ -461,10 +431,10 @@
     }
 
     .statement {
-      padding: 28px;
-      border-left: 3px solid var(--accent);
-      background: #fff;
-      box-shadow: var(--shadow);
+      /* テキストブロックは枠で囲まず余白と階層で読ませる（2026-05-03「枠→余白」変更2）。
+         左の3pxストライプは状態も優先度も示しておらず装飾でしかないため削除。 */
+      padding: 8px 0 8px 28px;
+      border-left: 1px solid var(--line);
     }
 
     .statement p {
@@ -478,11 +448,11 @@
     }
 
     .image-card {
+      /* 画像は border-radius のみ残し、box-shadow は削除（2026-05-03「枠→余白」変更1）。 */
       overflow: hidden;
       border: none;
       border-radius: 8px;
       background: rgba(var(--accent-rgb), 0.04);
-      box-shadow: var(--shadow);
       padding: 0;
     }
 
