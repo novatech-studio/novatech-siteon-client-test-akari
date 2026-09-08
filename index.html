@@ -213,7 +213,7 @@
     .hero-inner {
       width: min(calc(100% - 2 * var(--gutter)), var(--max));
       margin: 0 auto;
-      padding: 112px 0 148px;
+      padding: clamp(88px, 9vw, 116px) 0 clamp(88px, 9vw, 120px);
       display: grid;
       grid-template-columns: minmax(0, 1.2fr) minmax(260px, 0.7fr);
       gap: 48px;
@@ -224,6 +224,56 @@
       position: relative;
       z-index: 1;
       max-width: 740px;
+    }
+
+    .hero-facts {
+      position: relative;
+      z-index: 1;
+      align-self: end;
+      padding: 24px 26px;
+      border-radius: 8px;
+      background: rgba(20, 24, 42, 0.62);
+      backdrop-filter: blur(10px);
+      color: #fff;
+    }
+
+    .hero-facts dl {
+      display: grid;
+      gap: 0;
+      margin: 0;
+    }
+
+    .hero-facts dl > div {
+      display: grid;
+      gap: 2px;
+      padding: 12px 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.16);
+    }
+
+    .hero-facts dl > div:first-child {
+      border-top: 0;
+      padding-top: 0;
+    }
+
+    .hero-facts dl > div:last-child {
+      padding-bottom: 0;
+    }
+
+    .hero-facts dt {
+      font-size: 0.76rem;
+      letter-spacing: 0.08em;
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .hero-facts dd {
+      margin: 0;
+      font-size: 1rem;
+    }
+
+    .hero-facts dd a {
+      color: #fff;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.45);
     }
 
     .eyebrow {
@@ -353,12 +403,15 @@
     }
 
     section {
-      padding: 92px 0;
+      /* 全幅で 92px 固定だったため、モバイルで過大・デスクトップで不足していた。
+         rules.md 22（desktop 120px / mobile 72px）と 45（clamp で流体化）に合わせる。 */
+      padding: clamp(72px, 9vw, 120px) 0;
     }
 
     .section-heading {
       display: grid;
-      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+      /* 見出し側が説明側より狭く、h2 が不要に折り返していた。比率を逆にする。 */
+      grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
       gap: 24px;
       margin-bottom: 42px;
       align-items: start;
@@ -385,12 +438,16 @@
 
     .about-grid {
       grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.9fr);
-      align-items: start;
+      /* リード文を見出し側へ、3枚カードを全幅へ移したことで左カラムが引用文1つになり、
+         start 揃えだと右の画像との高低差がそのまま下部の空白として残る。中央で揃える。 */
+      align-items: center;
     }
 
-    /* about セクションの heading は単一列で全幅表示 */
-    #about .section-heading > div {
+    /* 3枚のカードを左カラム内(各209px)ではなく全幅に置く。
+       209px では日本語本文が15文字/行になり語中で割れていた。 */
+    .about-grid > .strengths-grid {
       grid-column: 1 / -1;
+      margin-top: 8px;
     }
 
     .about-lead {
@@ -575,7 +632,7 @@
 
     .profile-layout {
       display: grid;
-      grid-template-columns: 340px minmax(0, 1fr);
+      grid-template-columns: 420px minmax(0, 1fr);
       gap: 28px;
       align-items: start;
     }
@@ -599,7 +656,7 @@
 
     .member {
       display: grid;
-      grid-template-columns: 92px minmax(0, 1fr);
+      grid-template-columns: 120px minmax(0, 1fr);
       gap: 16px;
       align-items: center;
       padding-bottom: 14px;
@@ -624,6 +681,55 @@
     .faq-list {
       display: grid;
       gap: 0;
+    }
+
+    .faq-item p {
+      /* 日本語の適正行長は35〜45文字。1180px 全幅だと73文字/行になる。 */
+      max-width: 42em;
+      margin: 0;
+      padding-top: 12px;
+    }
+
+    /* 5問すべて展開すると 375px で 1,566px を占めるため details で折りたたむ。
+       JS 不要・キーボード操作可・検索エンジンからも本文が読める。 */
+    .faq-item summary {
+      display: flex;
+      align-items: baseline;
+      gap: 14px;
+      cursor: pointer;
+      list-style: none;
+      padding-right: 32px;
+      position: relative;
+    }
+
+    .faq-item summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .faq-item summary::after {
+      content: "";
+      position: absolute;
+      right: 4px;
+      top: 0.55em;
+      width: 10px;
+      height: 10px;
+      border-right: 1.5px solid var(--text-mid);
+      border-bottom: 1.5px solid var(--text-mid);
+      transform: rotate(45deg);
+      transition: transform 0.2s ease;
+    }
+
+    .faq-item[open] summary::after {
+      transform: rotate(-135deg);
+    }
+
+    .faq-item summary h3 {
+      margin: 0;
+    }
+
+    .faq-item summary:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 4px;
     }
 
     .faq-item {
@@ -767,7 +873,7 @@
     }
 
     .cta {
-      padding-top: 0;
+      padding-top: clamp(32px, 5vw, 64px);
     }
 
     .cta-card {
@@ -868,6 +974,39 @@
     }
 
     @media (max-width: 760px) {
+      /* 4:3 のままだと画像1枚で245px使い、6枚で1500px近くになる。
+         モバイルは 16:9 にして縦の長さを詰める。 */
+      .service-card img,
+      .strength-card img {
+        aspect-ratio: 16 / 9;
+        object-fit: cover;
+        height: auto;
+      }
+
+      /* ヒーロー情報カードを縦積みのままにするとヒーローだけで 1,116px を占める。
+         2列に畳んで高さを半分にする。 */
+      .hero-facts {
+        padding: 18px 20px;
+      }
+
+      .hero-facts dl {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        column-gap: 20px;
+      }
+
+      .hero-facts dl > div {
+        padding: 10px 0;
+      }
+
+      .hero-facts dl > div:nth-child(2) {
+        border-top: 0;
+        padding-top: 0;
+      }
+
+      .hero-facts dd {
+        font-size: 0.94rem;
+      }
+
       /* 会社概要リストも狭い幅ではラベル/値を縦に積む。 */
       .company-list li {
         grid-template-columns: minmax(0, 1fr);
@@ -1106,6 +1245,15 @@
             <a class="button secondary" href="#service">支援内容を見る</a>
           </div>
         </div>
+        <!-- 右カラム約465px が空のままだったため、連絡手段をファーストビューに置く。 -->
+        <aside class="hero-facts" aria-label="事務所の基本情報">
+          <dl>
+            <div><dt>初回相談</dt><dd>無料で承ります</dd></div>
+            <div><dt>受付時間</dt><dd>平日 9:00-18:00</dd></div>
+            <div><dt>対応エリア</dt><dd>東京都内中心</dd></div>
+            <div><dt>お電話</dt><dd><a href="tel:03-0000-9999">03-0000-9999</a></dd></div>
+          </dl>
+        </aside>
       </div>
     </section>
 
@@ -1117,32 +1265,32 @@
             <div class="section-kicker">About 01</div>
             <h2>数字の先にある意思決定まで、静かに伴走する事務所です。</h2>
           </div>
+          <p class="about-lead">月次の整理に終始するのではなく、資金繰り、投資判断、人員計画まで見通した助言を重ねること。それが Seion Ledger税理士事務所の基本姿勢です。</p>
         </div>
         <div class="about-grid">
           <div class="about-copy">
-            <p class="about-lead">月次の整理に終始するのではなく、資金繰り、投資判断、人員計画まで見通した助言を重ねること。それが Seion Ledger税理士事務所の基本姿勢です。</p>
             <div class="statement">
               <p>税務は、経営における守りであると同時に、次の一手を照らすための基盤でもあります。記帳の精度を整え、会計の見え方を揃え、経営者が安心して判断できる状態をつくる。その積み重ねを、私たちは一件ずつ丁寧に担います。</p>
-            </div>
-            <div class="strengths-grid">
-              <div class="strength-item">
-                <h3>丁寧な記帳</h3>
-                <p>月次の数字を正確に整え、経営判断の土台をつくります。</p>
-              </div>
-              <div class="strength-item">
-                <h3>いつでも相談</h3>
-                <p>日常の疑問から経営判断まで、担当者が直接お応えします。</p>
-              </div>
-              <div class="strength-item">
-                <h3>継続的な支援</h3>
-                <p>創業期から成長局面まで、事業のフェーズに合わせて伴走します。</p>
-              </div>
             </div>
           </div>
           <div class="portrait-stack">
             <figure class="image-card">
               <img src="images/profile-hayase.webp" alt="代表税理士 早瀬 恒一" width="400" height="500" loading="lazy">
             </figure>
+          </div>
+          <div class="strengths-grid">
+                <div class="strength-item">
+                  <h3>丁寧な記帳</h3>
+                  <p>月次の数字を正確に整え、経営判断の土台をつくります。</p>
+                </div>
+                <div class="strength-item">
+                  <h3>いつでも相談</h3>
+                  <p>日常の疑問から経営判断まで、担当者が直接お応えします。</p>
+                </div>
+                <div class="strength-item">
+                  <h3>継続的な支援</h3>
+                  <p>創業期から成長局面まで、事業のフェーズに合わせて伴走します。</p>
+                </div>
           </div>
         </div>
       </div>
@@ -1308,31 +1456,41 @@
           <p>支援範囲や費用感について、初回の段階でご不安を残さないよう、基本的な考え方を先にお示ししています。</p>
         </div>
         <div class="faq-list">
-          <article class="faq-item">
-            <span class="faq-label">Q1</span>
-            <h3>初回相談は無料ですか。</h3>
+          <details class="faq-item" open>
+            <summary>
+              <span class="faq-label">Q1</span>
+              <h3>初回相談は無料ですか。</h3>
+            </summary>
             <p>はい。初回相談は無料です。現状の課題整理と、必要な支援範囲の見立てまで丁寧にご案内します。</p>
-          </article>
-          <article class="faq-item">
-            <span class="faq-label">Q2</span>
-            <h3>顧問料の目安はいくらですか。</h3>
+          </details>
+          <details class="faq-item">
+            <summary>
+              <span class="faq-label">Q2</span>
+              <h3>顧問料の目安はいくらですか。</h3>
+            </summary>
             <p>月額 2万円からを目安に、取引量やご支援範囲に応じて個別にお見積もりします。</p>
-          </article>
-          <article class="faq-item">
-            <span class="faq-label">Q3</span>
-            <h3>個人事業主にも対応していますか。</h3>
+          </details>
+          <details class="faq-item">
+            <summary>
+              <span class="faq-label">Q3</span>
+              <h3>個人事業主にも対応していますか。</h3>
+            </summary>
             <p>対応可能です。開業初年度の整理から、青色申告、資金計画のご相談まで承ります。</p>
-          </article>
-          <article class="faq-item">
-            <span class="faq-label">Q4</span>
-            <h3>確定申告だけの依頼もできますか。</h3>
+          </details>
+          <details class="faq-item">
+            <summary>
+              <span class="faq-label">Q4</span>
+              <h3>確定申告だけの依頼もできますか。</h3>
+            </summary>
             <p>可能です。単発の確定申告支援にも対応し、必要に応じて継続支援のご提案を行います。</p>
-          </article>
-          <article class="faq-item">
-            <span class="faq-label">Q5</span>
-            <h3>対応エリアはどこまでですか。</h3>
+          </details>
+          <details class="faq-item">
+            <summary>
+              <span class="faq-label">Q5</span>
+              <h3>対応エリアはどこまでですか。</h3>
+            </summary>
             <p>東京都内中心に対応しています。オンライン面談を組み合わせることで、近隣エリアのご相談にも柔軟に対応します。</p>
-          </article>
+          </details>
         </div>
       </div>
     </section>
