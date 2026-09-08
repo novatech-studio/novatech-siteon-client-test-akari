@@ -1100,6 +1100,14 @@
       overflow-wrap: anywhere;
     }
 
+    /* 1c. 日本語の禁則処理（rules.md cat9 改行）
+       overflow-wrap: anywhere は禁則を無視して折り返すため、長音符「ー」や
+       促音「ッ」、句読点が行頭に孤立する。line-break: strict で禁則を効かせる。
+       keep-all と違い min-content 幅を変えないので、横はみ出しを起こさない。 */
+    body {
+      line-break: strict;
+    }
+
     /* 2. アンカーの着地点を固定ヘッダーの下に出す */
     [id] {
       scroll-margin-top: calc(var(--mb-header-h) + 12px);
