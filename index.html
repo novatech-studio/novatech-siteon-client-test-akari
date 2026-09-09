@@ -20,15 +20,15 @@
   <style>
     :root {
       color-scheme: only light;
-      --bg: #F5F6F8;
-      --bg-alt: #E8EAF0;
+      --bg: #FAFAF9;
+      --bg-alt: #F0EFEC;
       --bg-dark: #14182A;
       --text: #14182A;
       --text-mid: #3A4060;
       --text-light: #656B89;  /* WCAG AA 4.5:1（旧 #6A7090 は 4.18）*/
       --accent: #2D3748;
       --accent-rgb: 45, 55, 72;
-      --line: #D0D4DC;
+      --line: #E3E1DD;
       --r: 4px;
       --max: 1180px;
       --gutter: 24px;
@@ -36,7 +36,23 @@
       --font-display: Georgia, "Times New Roman", serif;
       --font-sans: "Hiragino Sans", "Yu Gothic", "Meiryo", sans-serif;
       --font-serif: "Hiragino Mincho ProN", "Yu Mincho", "Noto Serif JP", serif;
-    }
+    
+      /* ===== タイプスケール（Refero Styles の DESIGN.md 形式に倣う）=====
+         役割ごとに1つだけ値を持ち、表にない値は新しく作らない。
+         これまで 0.78 / 0.8 / 0.82rem のように 0.3px しか違わない値が並び、
+         h2 と h3 に至ってはブラウザ既定のままだった。 */
+      --t-caption: 0.8rem;
+      --t-small: 0.9rem;
+      --t-body: 1rem;
+      --t-lead: 1.15rem;
+      --t-subheading: clamp(1.25rem, 2vw, 1.5rem);
+      --t-heading: clamp(1.6rem, 3.2vw, 2.25rem);
+      --t-display: clamp(1.45rem, 6.4vw, 3.8rem);
+
+      --lh-display: 1.16;
+      --lh-heading: 1.45;
+      --lh-body: 1.85;
+}
 
     * {
       box-sizing: border-box;
@@ -144,13 +160,13 @@
 
     .brand-mark strong {
       font-family: var(--font-display);
-      font-size: 1.15rem;
+      font-size: var(--t-lead);
       font-weight: 400;
     }
 
     .brand-mark span {
       color: var(--text-mid);
-      font-size: 0.78rem;
+      font-size: var(--t-caption);
     }
 
     .nav-list {
@@ -161,7 +177,7 @@
       padding: 0;
       list-style: none;
       color: var(--text-mid);
-      font-size: 0.92rem;
+      font-size: var(--t-small);
     }
 
     .menu-toggle {
@@ -251,7 +267,7 @@
       gap: 12px;
       margin-bottom: 24px;
       color: var(--text-light);
-      font-size: 0.82rem;
+      font-size: var(--t-caption);
     }
 
     .eyebrow::before {
@@ -270,10 +286,22 @@
       line-height: 1.25;
     }
 
+    h2 {
+      font-size: var(--t-heading);
+      line-height: var(--lh-heading);
+      font-weight: 400;
+    }
+
+    h3 {
+      font-size: var(--t-subheading);
+      line-height: var(--lh-heading);
+      font-weight: 400;
+    }
+
     h1 {
       /* 320px でも「中小企業の意思決定に、」が1行に収まる下限にする。
          2rem のままだと折り返して「に、」が行頭に孤立する（rules.md 52 / 45）。 */
-      font-size: clamp(1.45rem, 6.4vw, 3.8rem);
+      font-size: var(--t-display);
       letter-spacing: 0.03em;
       word-break: keep-all;
       overflow-wrap: normal;
@@ -283,7 +311,7 @@
       max-width: 40rem;
       margin: 24px 0 0;
       color: var(--text-mid);
-      font-size: 1.06rem;
+      font-size: var(--t-body);
     }
 
     .hero-actions {
@@ -358,7 +386,7 @@
 
     .section-kicker {
       color: var(--text-mid);
-      font-size: 0.82rem;
+      font-size: var(--t-caption);
     }
 
     .section-heading p {
@@ -442,7 +470,7 @@
     .image-card figcaption {
       padding: 14px 16px 16px;
       color: var(--text-light);
-      font-size: 0.88rem;
+      font-size: var(--t-small);
     }
 
     .strengths-grid {
@@ -453,17 +481,21 @@
 
     .strength-item {
       padding: 28px 32px;
-      background: rgba(0, 0, 0, 0.02);
+      /* 1つおきに塗ると、塗られていない列が抜け落ちて見える。
+         塗りではなく 1px の罫線で列を分ける（Refero Styles の実例に倣う）。 */
+      border-left: 1px solid var(--line);
     }
 
-    .strength-item:nth-child(even) {
-      background: transparent;
+    .strength-item:first-child {
+      border-left: 0;
+      padding-left: 0;
     }
+
 
     .strength-item h3 {
       margin: 0 0 10px;
       font-family: var(--font-heading);
-      font-size: 1rem;
+      font-size: var(--t-body);
       font-weight: 500;
       color: var(--text);
       letter-spacing: 0.04em;
@@ -471,7 +503,7 @@
 
     .strength-item p {
       margin: 0;
-      font-size: 0.88rem;
+      font-size: var(--t-small);
       color: var(--text-mid);
       line-height: 1.8;
     }
@@ -525,13 +557,13 @@
     .faq-item h3,
     .cta-card h2 {
       margin-bottom: 10px;
-      font-size: 1.42rem;
+      font-size: var(--t-subheading);
     }
 
     .service-meta {
       margin-top: 14px;
       color: var(--text-light);
-      font-size: 0.9rem;
+      font-size: var(--t-small);
     }
 
     .strength-grid {
@@ -692,7 +724,7 @@
       margin-bottom: 10px;
       color: var(--text-mid);
       font-family: var(--font-display);
-      font-size: 1.1rem;
+      font-size: var(--t-lead);
     }
 
     .company-grid {
@@ -758,7 +790,7 @@
     }
 
     .contact-card .contact-list strong {
-      font-size: 0.8rem;
+      font-size: var(--t-caption);
       letter-spacing: 0.04em;
     }
 
@@ -767,7 +799,7 @@
       border: none;
       border-radius: calc(var(--r) * 2);
       background: rgba(var(--accent-rgb), 0.04);
-      box-shadow: var(--shadow);
+      border: 1px solid var(--line);
     }
 
     .form-grid {
@@ -787,7 +819,7 @@
 
     .field label {
       color: var(--text-mid);
-      font-size: 0.92rem;
+      font-size: var(--t-small);
     }
 
     .field input,
@@ -808,7 +840,7 @@
     .form-note {
       margin: 16px 0 0;
       color: var(--text-light);
-      font-size: 0.9rem;
+      font-size: var(--t-small);
     }
 
     .cta {
@@ -841,7 +873,7 @@
 
     .cta-note {
       color: rgba(255, 255, 255, 0.56);
-      font-size: 0.8rem;
+      font-size: var(--t-caption);
     }
 
     .site-footer {
@@ -864,7 +896,7 @@
     .footer-brand strong {
       font-family: var(--font-display);
       font-weight: 400;
-      font-size: 1.2rem;
+      font-size: var(--t-lead);
     }
 
 
@@ -887,7 +919,7 @@
       color: #fff;
       background: var(--bg-dark);
       text-align: center;
-      font-size: 0.9rem;
+      font-size: var(--t-small);
     }
 
 
@@ -897,7 +929,7 @@
       margin: 0;
       padding: 12px 0 16px;
       text-align: center;
-      font-size: 0.8rem;
+      font-size: var(--t-caption);
       color: inherit;
     }
 
@@ -1013,7 +1045,7 @@
         min-height: 44px;
         border-bottom: 1px solid var(--line);
         width: 100%;
-        font-size: 0.95rem;
+        font-size: var(--t-small);
       }
 
       .nav-list li:last-child a {
@@ -1027,9 +1059,6 @@
         grid-template-columns: minmax(0, 1fr);
       }
 
-      .strength-item:nth-child(even) {
-        background: rgba(0, 0, 0, 0.02);
-      }
 
       .hero-inner {
         padding: 56px 0 36px;
@@ -1109,7 +1138,7 @@
       input,
       select,
       textarea {
-        font-size: 16px;
+        font-size: var(--t-body);
       }
 
       a[href^="tel:"],
