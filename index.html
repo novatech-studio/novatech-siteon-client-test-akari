@@ -932,6 +932,25 @@
       color: inherit;
     }
 
+
+    /* ===== 和文に英字用のタイポを当てない（2026-09-09 / rules.md 75）=====
+       text-transform: uppercase は日本語に効果がないのに、英字前提のセレクタが
+       そのまま和文にも当たっていた。字間も英字の組み方をそのまま持ち込むと、
+       日本語では語の区切りが消えて読みにくくなる。
+       lang="en" を付けた要素（Concept / BLOOM 等）は対象外。
+       :lang(ja) を2回書いているのは詳細度を (0,2,0) に上げるため。
+       .nav a のような子孫セレクタ (0,1,1) に負けないようにする。 */
+    :lang(ja):lang(ja) { text-transform: none; }
+
+    /* ボタンとナビの和文ラベルは字間を詰める。見出しの字間は意図的な設計なので触らない。 */
+    button:lang(ja),
+    nav a:lang(ja),
+    [class*="nav"] a:lang(ja),
+    a[class*="btn"]:lang(ja),
+    a[class*="button"]:lang(ja),
+    .btn:lang(ja),
+    .button:lang(ja) { letter-spacing: 0.04em; }
+
     @media (max-width: 1040px) {
       .hero-inner,
       .section-heading,
