@@ -951,6 +951,11 @@
     .btn:lang(ja),
     .button:lang(ja) { letter-spacing: 0.04em; }
 
+
+    /* 和文混在の親から text-transform を継承していた英字ラベル。
+       :lang(ja) の打ち消しが親に当たるため、ここで明示的に戻す。 */
+    [data-caps] { text-transform: uppercase; }
+
     @media (max-width: 1040px) {
       .hero-inner,
       .section-heading,
@@ -1219,7 +1224,7 @@
   <header class="site-header">
     <div class="header-inner">
       <a class="brand-mark" href="#top" aria-label="Seion Ledger セイオン税理士事務所 トップへ">
-        <strong>Seion Ledger</strong>
+        <strong lang="en">Seion Ledger</strong>
         <span>セイオン税理士事務所</span>
       </a>
       <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav-list-menu" aria-label="メニューを開く"><span class="toggle-bar" aria-hidden="true"></span></button>
@@ -1241,7 +1246,7 @@
     <section class="hero" id="top" aria-label="Hero">
       <div class="hero-inner">
         <div class="hero-copy">
-          <span class="eyebrow">Trusted Tax &amp; Accounting Partner</span>
+          <span class="eyebrow" data-caps lang="en">Trusted Tax &amp; Accounting Partner</span>
           <h1>中小企業の意思決定に、<br>明かりを灯す。</h1>
           <p>東京・新宿の税理士事務所。記帳代行から節税提案まで、経営を数字で支えます。</p>
           <div class="hero-actions">
@@ -1266,7 +1271,7 @@
       <div class="section-inner">
         <div class="section-heading">
           <div>
-            <div class="section-kicker">About 01</div>
+            <div class="section-kicker" lang="en">About 01</div>
             <h2>数字の先にある意思決定まで、静かに伴走する事務所です。</h2>
           </div>
           <p class="about-lead">月次の整理に終始するのではなく、資金繰り、投資判断、人員計画まで見通した助言を重ねること。それが Seion Ledger税理士事務所の基本姿勢です。</p>
@@ -1304,7 +1309,7 @@
       <div class="section-inner">
         <div class="section-heading">
           <div>
-            <div class="section-kicker">Service 02</div>
+            <div class="section-kicker" lang="en">Service 02</div>
             <h2>実務の負荷を減らしながら、経営に必要な視点を届けます。</h2>
           </div>
           <p>日々の会計入力から、節税の構想、決算前の着地予測まで。現場で必要になる仕事を分断せず、一連の流れとして整えます。</p>
@@ -1366,7 +1371,7 @@
       <div class="section-inner">
         <div class="section-heading">
           <div>
-            <div class="section-kicker">Strength 03</div>
+            <div class="section-kicker" lang="en">Strength 03</div>
             <h2>相談のしやすさと、答えの確かさを両立させます。</h2>
           </div>
           <p>顧問先との対話を密に保ちながら、税務判断は常に根拠に基づいて整理すること。小回りと正確性の両立を、実務で徹底しています。</p>
@@ -1410,7 +1415,7 @@
       <div class="section-inner">
         <div class="section-heading">
           <div>
-            <div class="section-kicker">Profile 04</div>
+            <div class="section-kicker" lang="en">Profile 04</div>
             <h2>誰がどこまで担当するかを、はじめにお伝えします。</h2>
           </div>
           <p>税務判断の精度だけでなく、相談相手としての距離感も重要です。役割分担を明確にしながら、誰が見ても引き継げる実務体制を整えています。</p>
@@ -1454,7 +1459,7 @@
       <div class="section-inner">
         <div class="section-heading">
           <div>
-            <div class="section-kicker">FAQ 05</div>
+            <div class="section-kicker" lang="en">FAQ 05</div>
             <h2>ご相談前によくいただくご質問</h2>
           </div>
           <p>支援範囲や費用感について、初回の段階でご不安を残さないよう、基本的な考え方を先にお示ししています。</p>
@@ -1503,7 +1508,7 @@
       <div class="section-inner">
         <div class="section-heading">
           <div>
-            <div class="section-kicker">Company 06</div>
+            <div class="section-kicker" lang="en">Company 06</div>
             <h2>事務所概要</h2>
           </div>
           <p>ご相談のしやすさと、継続支援のしやすさの両面を整え、経営に寄り添う実務パートナーとしての体制を築いています。</p>
@@ -1541,7 +1546,7 @@
       <div class="section-inner">
         <div class="section-heading">
           <div>
-            <div class="section-kicker">Contact 07</div>
+            <div class="section-kicker" lang="en">Contact 07</div>
             <h2>初回相談のご予約・お問い合わせ</h2>
           </div>
           <p>現在の会計状況が整理できていなくても問題ありません。背景をうかがいながら、優先順位の高い論点から整理いたします。</p>
@@ -1587,7 +1592,7 @@
       <div class="section-inner">
         <div class="cta-card">
           <div>
-            <div class="cta-note">For Decisive Management</div>
+            <div class="cta-note" lang="en">For Decisive Management</div>
             <h2>税務を守りに留めず、次の判断材料へ。</h2>
             <p>経営者が安心して数字を見られる状態を整え、意思決定の速度と確度を高めます。月次顧問、単発相談、創業時の体制設計までご相談ください。</p>
           </div>
