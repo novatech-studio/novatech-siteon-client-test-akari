@@ -194,30 +194,41 @@
     .menu-open .toggle-bar::before { transform: rotate(45deg) translate(4px, 4px); }
     .menu-open .toggle-bar::after  { transform: rotate(-45deg) translate(4px, -4px); }
 
+    /* 写真の上に白文字を置くために rgba(20,24,42,0.7) の膜を全面にかけていた。
+       写真（白い低層オフィスの入口）を7割潰したうえ、明るいサイトの中でヒーローだけ
+       暗くなっていた。文字は明るい地の上に置き、写真は帯として原寸で見せる。 */
     .hero {
       position: relative;
-      color: #fff;
-      background:
-        linear-gradient(rgba(20, 24, 42, 0.7), rgba(20, 24, 42, 0.7)),
-        url("images/hero.webp") center/cover;
+      color: var(--text);
+      background: var(--bg);
+      /* section 共通の上下 padding（115px）が .hero-inner の padding と二重にかかり、
+         見出しの手前に 200px 以上の空白ができていた。ヒーローの余白は .hero-inner が持つ。 */
+      padding: 0;
     }
 
-    .hero::after {
-      content: "";
-      position: absolute;
-      inset: auto 0 0 0;
-      height: 140px;
-      background: linear-gradient(180deg, rgba(20, 24, 42, 0), var(--bg));
+    .hero-photo {
+      margin: 0;
+      width: 100%;
     }
+
+    .hero-photo img {
+      display: block;
+      width: 100%;
+      height: clamp(220px, 38vw, 460px);
+      object-fit: cover;
+      object-position: center 62%;
+    }
+
+
 
     .hero-inner {
       width: min(calc(100% - 2 * var(--gutter)), var(--max));
       margin: 0 auto;
-      padding: clamp(88px, 9vw, 116px) 0 clamp(88px, 9vw, 120px);
+      padding: clamp(56px, 7vw, 88px) 0 clamp(36px, 4.5vw, 56px);
       display: grid;
-      grid-template-columns: minmax(0, 1.2fr) minmax(260px, 0.7fr);
+      grid-template-columns: minmax(0, 1fr);
       gap: 48px;
-      align-items: end;
+      align-items: start;
     }
 
     .hero-copy {
@@ -226,62 +237,20 @@
       max-width: 740px;
     }
 
-    .hero-facts {
-      position: relative;
-      z-index: 1;
-      align-self: end;
-      padding: 24px 26px;
-      border-radius: calc(var(--r) * 2);
-      background: rgba(20, 24, 42, 0.62);
-      backdrop-filter: blur(10px);
-      color: #fff;
-    }
 
-    .hero-facts dl {
-      display: grid;
-      gap: 0;
-      margin: 0;
-    }
 
-    .hero-facts dl > div {
-      display: grid;
-      gap: 2px;
-      padding: 12px 0;
-      border-top: 1px solid rgba(255, 255, 255, 0.16);
-    }
 
-    .hero-facts dl > div:first-child {
-      border-top: 0;
-      padding-top: 0;
-    }
 
-    .hero-facts dl > div:last-child {
-      padding-bottom: 0;
-    }
 
-    .hero-facts dt {
-      font-size: 0.76rem;
-      letter-spacing: 0.08em;
-      color: rgba(255, 255, 255, 0.7);
-    }
 
-    .hero-facts dd {
-      margin: 0;
-      font-size: 1rem;
-    }
 
-    .hero-facts dd a {
-      color: #fff;
-      text-decoration: none;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.45);
-    }
 
     .eyebrow {
       display: inline-flex;
       align-items: center;
       gap: 12px;
       margin-bottom: 24px;
-      color: rgba(255, 255, 255, 0.78);
+      color: var(--text-light);
       font-size: 0.82rem;
     }
 
@@ -313,7 +282,7 @@
     .hero-copy p {
       max-width: 40rem;
       margin: 24px 0 0;
-      color: rgba(255, 255, 255, 0.82);
+      color: var(--text-mid);
       font-size: 1.06rem;
     }
 
@@ -356,15 +325,15 @@
 
     /* ヒーロー内のセカンダリボタンは白枠白字を維持 */
     .hero .button.secondary {
-      border-color: rgba(255, 255, 255, 0.34);
-      color: #fff;
+      border-color: var(--line);
+      color: var(--text);
       background: transparent;
     }
 
     .hero .button.secondary:hover,
     .hero .button.secondary:focus-visible {
-      background: rgba(255, 255, 255, 0.12);
-      color: #fff;
+      background: var(--bg-alt);
+      color: var(--text);
     }
 
     .button:hover,
@@ -986,27 +955,10 @@
 
       /* ヒーロー情報カードを縦積みのままにするとヒーローだけで 1,116px を占める。
          2列に畳んで高さを半分にする。 */
-      .hero-facts {
-        padding: 18px 20px;
-      }
 
-      .hero-facts dl {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        column-gap: 20px;
-      }
 
-      .hero-facts dl > div {
-        padding: 10px 0;
-      }
 
-      .hero-facts dl > div:nth-child(2) {
-        border-top: 0;
-        padding-top: 0;
-      }
 
-      .hero-facts dd {
-        font-size: 0.94rem;
-      }
 
       /* 会社概要リストも狭い幅ではラベル/値を縦に積む。 */
       .company-list li {
@@ -1080,7 +1032,7 @@
       }
 
       .hero-inner {
-        padding: 88px 0 120px;
+        padding: 56px 0 36px;
       }
 
       .member,
@@ -1254,16 +1206,11 @@
             <a class="button secondary" href="#service">支援内容を見る</a>
           </div>
         </div>
-        <!-- 右カラム約465px が空のままだったため、連絡手段をファーストビューに置く。 -->
-        <aside class="hero-facts" aria-label="事務所の基本情報">
-          <dl>
-            <div><dt>初回相談</dt><dd>無料で承ります</dd></div>
-            <div><dt>受付時間</dt><dd>平日 9:00-18:00</dd></div>
-            <div><dt>対応エリア</dt><dd>東京都内中心</dd></div>
-            <div><dt>お電話</dt><dd><a href="tel:03-0000-9999">03-0000-9999</a></dd></div>
-          </dl>
-        </aside>
       </div>
+      <figure class="hero-photo">
+        <img src="images/hero.webp" alt="Seion Ledger税理士事務所が入る建物の外観"
+             width="1694" height="929" fetchpriority="high">
+      </figure>
     </section>
 
 
