@@ -1157,6 +1157,13 @@
         text-align: center;
       }
     }
+
+    /* 句点だけが行頭に孤立していた。mobile-safety の overflow-wrap: anywhere が禁則を無視して折るため、
+       この要素だけ文節を保ち、収まらないときだけ break-word に逃がす。 */
+    .company-gallery figcaption {
+      word-break: keep-all;
+      overflow-wrap: break-word;
+    }
 </style>
   <script type="application/ld+json">
     {
@@ -1401,7 +1408,7 @@
           </figure>
           <div class="profile-body profile-card">
             <h3>代表 早瀬恒一 税理士</h3>
-            <p>中小企業の経営判断に関わる税務・会計支援を専門とし、記帳体制の立て直しから、着地予測を踏まえた節税提案までを一気通貫で担当。東京税理士会所属 第99999号。</p>
+            <p>中小企業の経営判断に関わる税務・会計支援を専門としています。記帳体制の立て直しから、着地予測を踏まえた節税提案までを一気通貫で担当。東京税理士会所属 第99999号。</p>
             <div class="member-list">
               <div class="member">
                 <img src="images/profile-shinozaki.webp" alt="税理士 篠崎理央" width="180" height="180" loading="lazy">
@@ -1510,7 +1517,7 @@
             </figure>
             <figure class="image-card">
               <img src="images/office-meeting.webp" alt="会議テーブルのある相談室" width="1400" height="933" loading="lazy">
-              <figcaption>資料を広げながら相談できる面談室。</figcaption>
+              <figcaption>資料を広げながら<wbr>相談できる面談室。</figcaption>
             </figure>
           </div>
         </div>
